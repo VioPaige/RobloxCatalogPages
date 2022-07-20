@@ -115,7 +115,7 @@ function css() {
 
 }
 
-
+const timer = ms => new Promise(res => setTimeout(res, ms))
 
 
 
@@ -134,72 +134,159 @@ if (window.location.href.includes(target)) {
     let div = document.getElementById('results')
     // div.appendChild(newul)
 
-    chrome.runtime.sendMessage({ params: window.location.href.split('catalog?')[1] }, async (res) => {
+    chrome.runtime.sendMessage({ params: "test" }, (res) => console.log(res))
+
+    // chrome.runtime.sendMessage({ params: window.location.href.split('catalog?')[1] }, async (res) => {
+
+    //     console.log(res)
+
+    //     let arrTest = [
+    //         {
+    //             "id": 7389760234,
+    //             "itemType": "Asset",
+    //             "assetType": 46,
+    //             "name": "Bauble Potion",
+    //             "description": "Green Scientist's favorite, home-concocted, destructive potion. The chemicals inside are volatile when mixed.\n\nMeant to be worn on Blocky bodies.\nSlim: https://www.roblox.com/catalog/7852978987/Bauble-Potion-Slim",
+    //             "productId": 1200606572,
+    //             "genres": [
+    //                 "All"
+    //             ],
+    //             "itemStatus": [],
+    //             "itemRestrictions": [],
+    //             "creatorType": "User",
+    //             "creatorTargetId": 1882767190,
+    //             "creatorName": "popstarpiranhas",
+    //             "hasVerifiedBadge": false,
+    //             "price": 100,
+    //             "favoriteCount": 1269,
+    //             "offSaleDeadline": null
+    //         },
+    //         {
+    //             "id": 6204738186,
+    //             "itemType": "Asset",
+    //             "assetType": 46,
+    //             "name": "Port-a-Noia Tea Dispenser 1.0",
+    //             "description": "Style your avatar with this lovely backpack that works as a tea dispenser! in collaboration with Metanoia Tea Shop\nhttps://www.roblox.com/groups/5486081/metanoia#!/about",
+    //             "productId": 1138628716,
+    //             "genres": [
+    //                 "All"
+    //             ],
+    //             "itemStatus": [],
+    //             "itemRestrictions": [],
+    //             "creatorType": "User",
+    //             "creatorTargetId": 210231230,
+    //             "creatorName": "MatthewDeIRey",
+    //             "hasVerifiedBadge": false,
+    //             "price": 100,
+    //             "favoriteCount": 2789,
+    //             "offSaleDeadline": null
+    //         },
+    //         {
+    //             "id": 6154231095,
+    //             "itemType": "Asset",
+    //             "assetType": 46,
+    //             "name": "Tech Ghost's Pulse Rifle",
+    //             "description": "Never fade away...\n\nThe Tech Ghost:\nhttps://www.roblox.com/catalog?Keyword=Tech&Category=13&Subcategory=40&CreatorName=JohnDrinkin\n\nClothing here provided by GreenBIak:\nhttps://www.roblox.com/catalog/6160645977/Tech-Ghosts-Armor\nhttps://www.roblox.com/catalog/6160644133/Tech-Ghosts-Armor",
+    //             "productId": 1134701942,
+    //             "genres": [
+    //                 "All"
+    //             ],
+    //             "itemStatus": [],
+    //             "itemRestrictions": [],
+    //             "creatorType": "User",
+    //             "creatorTargetId": 605939,
+    //             "creatorName": "JohnDrinkin",
+    //             "hasVerifiedBadge": false,
+    //             "price": 100,
+    //             "favoriteCount": 1092,
+    //             "offSaleDeadline": null
+    //         }
+    //     ]
+
+    //     let arr = res
+
+    //     for (let i of arr) {
+
+    //         let newli = document.createElement('li')
+    //         newli.classList = "list-item item-card ng-scope"
+    //         newli["item-card"] = ""
+    //         newli["ng-controller"] = "itemCardController"
+
+    //         let thumb = await fetch(`https://thumbnails.roblox.com/v1/assets?assetIds=${i.id}&size=150x150&format=Png&isCircular=false`).catch((e) => console.log(e))
+    //         thumb = await thumb.json()
+    //         console.log(thumb)
+
+    //             // let newa = document.createElement('a')
+    //             // newa.href = `https://www.roblox.com/catalog/${i.id}`
+    //             // newa.target = "_blank"
+    //             // newa.classList = "item-card-container"
+    //             // newa["ng-click"] = 
+    //         let inner = `<a href="https://www.roblox.com/catalog/${i.id}" target="_blank" class="item-card-container"
+    //                 ng-click="clickItemCard($event)" title="${i.name}">
+    //                 <!-- ngIf: item.itemStatusIconsAndLabels.length > 0 -->
+    //                 <div class="item-card-link">
+    //                     <div class="item-card-thumb-container">
+    //                         <thumbnail-2d class="item-card-thumb ng-isolate-scope" thumbnail-type="item.thumbnailType"
+    //                             thumbnail-target-id="${i.id}" alt-name="${i.name}">
+    //                             <span ng-class="$ctrl.getCssClasses()" class="thumbnail-2d-container" thumbnail-type="Asset"
+    //                                 thumbnail-target-id="${i.id}">
+    //                                 <!-- ngIf: $ctrl.thumbnailUrl && !$ctrl.isLazyLoadingEnabled() -->
+    //                                 <img ng-if="$ctrl.thumbnailUrl &amp;&amp; !$ctrl.isLazyLoadingEnabled()"
+    //                                     ng-src="${thumb.imageUrl}"
+    //                                     thumbnail-error="$ctrl.setThumbnailLoadFailed"
+    //                                     ng-class="{'loading': $ctrl.thumbnailUrl &amp;&amp; !isLoaded }" image-load=""
+    //                                     alt="${i.name}" title="${i.name}" class="ng-scope ng-isolate-scope"
+    //                                     src="${thumb.data[0].imageUrl}">
+    //                                 <!-- end ngIf: $ctrl.thumbnailUrl && !$ctrl.isLazyLoadingEnabled() -->
+    //                                 <!-- ngIf: $ctrl.thumbnailUrl && $ctrl.isLazyLoadingEnabled() -->
+    //                             </span>
+    //                         </thumbnail-2d>
+    //                         <span ng-show="item.itemRestrictionIcon" ng-class="item.itemRestrictionIcon" class="ng-hide">
+            
+    //                         </span>
+    //                     </div>
+    //                 </div>
+    //                 <!-- ngIf: layout.isItemDetailsLoaded || (item.detailsLoaded && isInfiniteScrollWebEnabled()) -->
+    //                 <div class="item-card-caption ng-scope"
+    //                     ng-if="layout.isItemDetailsLoaded || (item.detailsLoaded &amp;&amp; isInfiniteScrollWebEnabled())">
+    //                     <div class="item-card-name-link">
+    //                         <div class="item-card-name ng-binding" title="${i.name}">
+    //                             ${i.name}
+    //                         </div>
+    //                     </div>
+    //                     <div class="text-overflow item-card-price font-header-2 text-subheader ng-scope"
+    //                         ng-class="{'margin-top-none' : hasSecondaryInfo()}" ng-if="!item.priceStatus">
+    //                         <span class="icon icon-robux-16x16 ng-scope" ng-if="getDisplayPrice() || item.lowestPrice">
+            
+    //                         </span>
+    //                         <span class="text-robux-tile ng-binding ng-scope" ng-if="getDisplayPrice() &amp;&amp; !item.lowestPrice"
+    //                             ng-bind="getDisplayPrice() | number">
+    //                             ${i.price}
+    //                         </span>
+    //                     </div>
+    //                 </div>
+    //             </a>`
+
+    //         newli.innerHTML = inner
+    //         newul.appendChild(newli)
+
+    //     }
+
+    //     div.appendChild(newul)
+
+    // })
+    
+    console.log(`fetching`)
+
+    fetch(`https://vi-proxy.herokuapp.com/getresults/${window.location.href.split('catalog?')[1]}/none`).then(async (res) => {
 
         console.log(res)
+        res = await res.json()
+        console.log(res)
 
-        let arr = [
-            {
-                "id": 7389760234,
-                "itemType": "Asset",
-                "assetType": 46,
-                "name": "Bauble Potion",
-                "description": "Green Scientist's favorite, home-concocted, destructive potion. The chemicals inside are volatile when mixed.\n\nMeant to be worn on Blocky bodies.\nSlim: https://www.roblox.com/catalog/7852978987/Bauble-Potion-Slim",
-                "productId": 1200606572,
-                "genres": [
-                    "All"
-                ],
-                "itemStatus": [],
-                "itemRestrictions": [],
-                "creatorType": "User",
-                "creatorTargetId": 1882767190,
-                "creatorName": "popstarpiranhas",
-                "hasVerifiedBadge": false,
-                "price": 100,
-                "favoriteCount": 1269,
-                "offSaleDeadline": null
-            },
-            {
-                "id": 6204738186,
-                "itemType": "Asset",
-                "assetType": 46,
-                "name": "Port-a-Noia Tea Dispenser 1.0",
-                "description": "Style your avatar with this lovely backpack that works as a tea dispenser! in collaboration with Metanoia Tea Shop\nhttps://www.roblox.com/groups/5486081/metanoia#!/about",
-                "productId": 1138628716,
-                "genres": [
-                    "All"
-                ],
-                "itemStatus": [],
-                "itemRestrictions": [],
-                "creatorType": "User",
-                "creatorTargetId": 210231230,
-                "creatorName": "MatthewDeIRey",
-                "hasVerifiedBadge": false,
-                "price": 100,
-                "favoriteCount": 2789,
-                "offSaleDeadline": null
-            },
-            {
-                "id": 6154231095,
-                "itemType": "Asset",
-                "assetType": 46,
-                "name": "Tech Ghost's Pulse Rifle",
-                "description": "Never fade away...\n\nThe Tech Ghost:\nhttps://www.roblox.com/catalog?Keyword=Tech&Category=13&Subcategory=40&CreatorName=JohnDrinkin\n\nClothing here provided by GreenBIak:\nhttps://www.roblox.com/catalog/6160645977/Tech-Ghosts-Armor\nhttps://www.roblox.com/catalog/6160644133/Tech-Ghosts-Armor",
-                "productId": 1134701942,
-                "genres": [
-                    "All"
-                ],
-                "itemStatus": [],
-                "itemRestrictions": [],
-                "creatorType": "User",
-                "creatorTargetId": 605939,
-                "creatorName": "JohnDrinkin",
-                "hasVerifiedBadge": false,
-                "price": 100,
-                "favoriteCount": 1092,
-                "offSaleDeadline": null
-            }
-        ]
+        let arr = res.data
+
+        div.appendChild(newul)
 
         for (let i of arr) {
 
@@ -208,9 +295,12 @@ if (window.location.href.includes(target)) {
             newli["item-card"] = ""
             newli["ng-controller"] = "itemCardController"
 
-            let thumb = await fetch(`https://thumbnails.roblox.com/v1/assets?assetIds=${i.id}&size=150x150&format=Png&isCircular=false`).catch((e) => console.log(e))
+            let thumb = await fetch(`https://vi-proxy.herokuapp.com/getimglink/${i.id}`).catch((e) => console.log(e))
+            console.log(thumb)
             thumb = await thumb.json()
             console.log(thumb)
+
+            let acthumb = thumb.data[0] ? thumb.data[0].imageUrl : "none"
 
                 // let newa = document.createElement('a')
                 // newa.href = `https://www.roblox.com/catalog/${i.id}`
@@ -228,11 +318,11 @@ if (window.location.href.includes(target)) {
                                     thumbnail-target-id="${i.id}">
                                     <!-- ngIf: $ctrl.thumbnailUrl && !$ctrl.isLazyLoadingEnabled() -->
                                     <img ng-if="$ctrl.thumbnailUrl &amp;&amp; !$ctrl.isLazyLoadingEnabled()"
-                                        ng-src="${thumb.imageUrl}"
+                                        ng-src="${acthumb}"
                                         thumbnail-error="$ctrl.setThumbnailLoadFailed"
                                         ng-class="{'loading': $ctrl.thumbnailUrl &amp;&amp; !isLoaded }" image-load=""
                                         alt="${i.name}" title="${i.name}" class="ng-scope ng-isolate-scope"
-                                        src="${thumb.data[0].imageUrl}">
+                                        src="${acthumb}">
                                     <!-- end ngIf: $ctrl.thumbnailUrl && !$ctrl.isLazyLoadingEnabled() -->
                                     <!-- ngIf: $ctrl.thumbnailUrl && $ctrl.isLazyLoadingEnabled() -->
                                 </span>
@@ -266,11 +356,17 @@ if (window.location.href.includes(target)) {
             newli.innerHTML = inner
             newul.appendChild(newli)
 
+            await timer(1000)
+
         }
 
-        div.appendChild(newul)
 
-    })
+
+
+
+    }).catch((e) => console.log(e))
+
+    console.log(`after fetch`)
 
 }
 
